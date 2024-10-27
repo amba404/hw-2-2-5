@@ -17,7 +17,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     @Override
     public String add(String firstName, String lastName) {
         if (employees.size() >= maxEmployeeCount) {
-            throw new EmployeeStorageIsFullException();
+            throw new EmployeeStorageIsFullException("Все вакансии заполнены");
         }
 
         Employee newEmployee = new Employee(firstName, lastName);
@@ -26,7 +26,7 @@ public class EmployeeService implements EmployeeServiceInterface {
             employees.add(newEmployee);
             return "Added: " + newEmployee;
         } else {
-            throw new EmployeeAlreadyAddedException();
+            throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен: " + newEmployee);
         }
     }
 
@@ -37,7 +37,7 @@ public class EmployeeService implements EmployeeServiceInterface {
             employees.remove(delEmployee);
             return "Removed: " + delEmployee;
         } else {
-            throw new EmployeeNotFoundException();
+            throw new EmployeeNotFoundException("Сотрудник не найден: " + delEmployee);
         }
     }
 
@@ -48,12 +48,12 @@ public class EmployeeService implements EmployeeServiceInterface {
         if (result != null) {
             return result;
         }
-        throw new EmployeeNotFoundException();
+        throw new EmployeeNotFoundException("Сотрудник не найден: " + findEmployee);
     }
 
     @Override
     public Object getList() {
-        return List.of(employees);
+        return employees;
     }
 
     private Employee find(Employee findEmployee) {

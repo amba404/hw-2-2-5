@@ -1,10 +1,10 @@
 package pro.sky.hw225.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.hw225.classes.Employee;
+import pro.sky.hw225.exceptions.EmployeeException;
 import pro.sky.hw225.interfaces.EmployeeServiceInterface;
 
 @RestController
@@ -34,5 +34,10 @@ public class EmployeeController {
     @GetMapping("/all")
     public Object answerAll() {
         return employeeService.getList();
+    }
+
+    @ExceptionHandler(EmployeeException.class)
+    public ResponseEntity<String> handleException(EmployeeException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }

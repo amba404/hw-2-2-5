@@ -1,5 +1,7 @@
 package pro.sky.hw225.classes;
 
+import pro.sky.hw225.exceptions.EmployeeIllegalArgumentsException;
+
 import java.util.Objects;
 
 public class Employee {
@@ -7,6 +9,12 @@ public class Employee {
     final private String lastName;
 
     public Employee(String firstName, String lastName) {
+        if (firstName == null || firstName.isBlank()) {
+            throw new EmployeeIllegalArgumentsException("Имя (firstName) не должно быть пустым");
+        }
+        if (lastName == null || lastName.isBlank()) {
+            throw new EmployeeIllegalArgumentsException("Фамиля (lastName) не должна быть пустой");
+        }
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -34,6 +42,9 @@ public class Employee {
 
     @Override
     public String toString() {
-        return firstName + ' ' + lastName;
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 }
