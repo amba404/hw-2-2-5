@@ -19,12 +19,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public String answerAdd(@RequestParam() String firstName, @RequestParam() String lastName) {
+    public Employee answerAdd(@RequestParam() String firstName, @RequestParam() String lastName) {
         return employeeService.add(firstName, lastName);
     }
 
     @GetMapping("/remove")
-    public String answerRemove(@RequestParam() String firstName, @RequestParam() String lastName) {
+    public Employee answerRemove(@RequestParam() String firstName, @RequestParam() String lastName) {
         return employeeService.remove(firstName, lastName);
     }
 
@@ -33,7 +33,7 @@ public class EmployeeController {
         return employeeService.find(firstName, lastName);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public Collection<Employee> answerAll() {
         return employeeService.getList();
     }
