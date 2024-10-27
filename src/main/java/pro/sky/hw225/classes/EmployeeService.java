@@ -7,6 +7,8 @@ import pro.sky.hw225.exceptions.EmployeeStorageIsFullException;
 import pro.sky.hw225.interfaces.EmployeeServiceInterface;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -15,7 +17,7 @@ public class EmployeeService implements EmployeeServiceInterface {
     private final List<Employee> employees = new ArrayList<>();
 
     @Override
-    public String add(String firstName, String lastName) {
+    public Employee add(String firstName, String lastName) {
         if (employees.size() >= maxEmployeeCount) {
             throw new EmployeeStorageIsFullException("Все вакансии заполнены");
         }
@@ -24,18 +26,18 @@ public class EmployeeService implements EmployeeServiceInterface {
 
         if (!employees.contains(newEmployee)) {
             employees.add(newEmployee);
-            return "Added: " + newEmployee;
+            return newEmployee;
         } else {
             throw new EmployeeAlreadyAddedException("Сотрудник уже добавлен: " + newEmployee);
         }
     }
 
     @Override
-    public String remove(String firstName, String lastName) {
+    public Employee remove(String firstName, String lastName) {
         Employee delEmployee = new Employee(firstName, lastName);
         if (employees.contains(delEmployee)) {
             employees.remove(delEmployee);
-            return "Removed: " + delEmployee;
+            return delEmployee;
         } else {
             throw new EmployeeNotFoundException("Сотрудник не найден: " + delEmployee);
         }
@@ -52,8 +54,8 @@ public class EmployeeService implements EmployeeServiceInterface {
     }
 
     @Override
-    public Object getList() {
-        return employees;
+    public Collection<Employee> getList() {
+        return Collections.unmodifiableList(employees);
     }
 
     private Employee find(Employee findEmployee) {

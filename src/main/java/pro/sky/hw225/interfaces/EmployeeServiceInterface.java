@@ -2,12 +2,14 @@ package pro.sky.hw225.interfaces;
 
 import pro.sky.hw225.classes.Employee;
 
-public interface EmployeeServiceInterface {
-    String add(String firstName, String lastName);
+import java.util.Collection;
 
-    String remove(String firstName, String lastName);
+public interface EmployeeServiceInterface {
+    Employee add(String firstName, String lastName);
+
+    Employee remove(String firstName, String lastName);
 
     Employee find(String firstName, String lastName);
 
-    Object getList();
+    Collection<Employee> getList();
 }

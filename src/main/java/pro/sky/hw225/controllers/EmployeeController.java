@@ -7,6 +7,8 @@ import pro.sky.hw225.classes.Employee;
 import pro.sky.hw225.exceptions.EmployeeException;
 import pro.sky.hw225.interfaces.EmployeeServiceInterface;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
@@ -31,8 +33,8 @@ public class EmployeeController {
         return employeeService.find(firstName, lastName);
     }
 
-    @GetMapping("/all")
-    public Object answerAll() {
+    @GetMapping("/")
+    public Collection<Employee> answerAll() {
         return employeeService.getList();
     }
 
