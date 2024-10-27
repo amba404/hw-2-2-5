@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class EmployeeService implements EmployeeServiceInterface {
     final private int maxEmployeeCount = 10;
-    private List<Employee> employees = new ArrayList<>();
+    private final List<Employee> employees = new ArrayList<>();
 
     @Override
     public String add(String firstName, String lastName) {
