@@ -1,4 +1,4 @@
-package pro.sky.hw225;
+package pro.sky.hw225.classes;
 
 import java.util.Objects;
 
