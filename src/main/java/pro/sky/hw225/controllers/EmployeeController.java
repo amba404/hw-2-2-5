@@ -33,7 +33,7 @@ public class EmployeeController {
         return employeeService.find(firstName, lastName);
     }
 
-    @GetMapping
+    @RequestMapping(value = {"", "/", "/welcome"}, method = RequestMethod.GET)
     public Collection<Employee> answerAll() {
         return employeeService.getList();
     }
