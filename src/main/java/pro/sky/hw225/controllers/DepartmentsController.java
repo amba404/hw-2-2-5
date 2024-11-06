@@ -24,19 +24,14 @@ public class DepartmentsController {
     }
 
     @GetMapping("/max-salary")
-    public Employee departmentMaxSalary(@RequestParam() int departmentId) {
+    public Employee departmentMaxSalary(@RequestParam(defaultValue = "0") int departmentId) {
         return departmentService.getEmployeeMaxSalary(departmentId);
     }
 
-//    @GetMapping("/remove")
-//    public Employee answerRemove(@RequestParam() String firstName, @RequestParam() String lastName) {
-//        return departmentService.remove(firstName, lastName);
-//    }
-//
-//    @GetMapping("/find")
-//    public Employee answerFind(@RequestParam() String firstName, @RequestParam() String lastName) {
-//        return departmentService.find(firstName, lastName);
-//    }
+    @GetMapping("/min-salary")
+    public Employee departmentMinSalary(@RequestParam(defaultValue = "0") int departmentId) {
+        return departmentService.getEmployeeMinSalary(departmentId);
+    }
 
     @RequestMapping(value = {"/all"}, method = RequestMethod.GET)
     public Collection<Employee> getAll(@RequestParam(defaultValue = "0") int departmentId) {

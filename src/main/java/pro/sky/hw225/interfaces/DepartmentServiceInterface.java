@@ -10,4 +10,6 @@ public interface DepartmentServiceInterface {
     Collection<Employee> getCreateTest();
 
     Employee getEmployeeMaxSalary(int departmentId);
+
+    Employee getEmployeeMinSalary(int departmentId);
 }

@@ -1,10 +1,12 @@
 package pro.sky.hw225.classes;
 
 import org.springframework.stereotype.Service;
+import pro.sky.hw225.exceptions.EmployeeNotFoundException;
 import pro.sky.hw225.interfaces.DepartmentServiceInterface;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -16,12 +18,17 @@ public class DepartmentService implements DepartmentServiceInterface {
         this.employeeService = employeeService;
     }
 
-    @Override
-    public Collection<Employee> getList(int departmentId) {
+    private Collection<Employee> getListByDepartment(int departmentId) {
         return employeeService.getList().stream()
                 .filter(e -> {
                     return departmentId < 1 || e.getDepartment() == departmentId;
                 })
+                .toList();
+    }
+
+    @Override
+    public Collection<Employee> getList(int departmentId) {
+        return getListByDepartment(departmentId).stream()
                 .sorted(Comparator
                         .comparingInt(Employee::getDepartment)
                         .thenComparing(Employee::getFullName))
@@ -47,7 +54,15 @@ public class DepartmentService implements DepartmentServiceInterface {
 
     @Override
     public Employee getEmployeeMaxSalary(int departmentId) {
-        Employee result = null;
-        return result;
+        Optional<Employee> result = getListByDepartment(departmentId).stream()
+                .max(Comparator.comparingDouble(Employee::getSalary));
+        return result.orElseThrow(() -> new EmployeeNotFoundException("Что-то пошло не так..."));
+    }
+
+    @Override
+    public Employee getEmployeeMinSalary(int departmentId) {
+        Optional<Employee> result = getListByDepartment(departmentId).stream()
+                .min(Comparator.comparingDouble(Employee::getSalary));
+        return result.orElseThrow(() -> new EmployeeNotFoundException("Что-то пошло не так..."));
     }
 }
