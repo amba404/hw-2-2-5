@@ -35,8 +35,7 @@ public class EmployeeService implements EmployeeServiceInterface {
         EmployeeHelper empHlp = new EmployeeHelper(firstName, lastName);
         Employee delEmployee = new Employee(empHlp.firstName, empHlp.lastName);
         if (employees.containsKey(empHlp.mapKey)) {
-            employees.remove(empHlp.mapKey);
-            return delEmployee;
+            return employees.remove(empHlp.mapKey);
         } else {
             throw new EmployeeNotFoundException("Сотрудник не найден: " + delEmployee);
         }
