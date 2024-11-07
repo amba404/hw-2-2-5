@@ -1,8 +1,10 @@
 package pro.sky.hw225.classes;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import pro.sky.hw225.exceptions.EmployeeAlreadyAddedException;
+import pro.sky.hw225.exceptions.EmployeeIllegalArgumentsException;
 import pro.sky.hw225.exceptions.EmployeeNotFoundException;
 import pro.sky.hw225.exceptions.EmployeeStorageIsFullException;
 import pro.sky.hw225.interfaces.EmployeeServiceInterface;
@@ -69,10 +71,15 @@ public class EmployeeService implements EmployeeServiceInterface {
         }
 
         private static @NotNull String getCleanName(@NotNull String name) {
-            name = name.trim().toLowerCase(Locale.ROOT);
-            if (!name.isEmpty()) {
-                name = name.substring(0, 1).toUpperCase(Locale.ROOT) + name.substring(1);
+            name = StringUtils.trim(name);
+            if (name.isEmpty()) {
+                throw new EmployeeIllegalArgumentsException("Имя/Фамилия не могут быть пустыми");
             }
+            if (!StringUtils.isAlpha(name)) {
+                throw new EmployeeIllegalArgumentsException(String.format("'%s' - cодержит недопустимые символы", name));
+            }
+            name = name.toLowerCase(Locale.ROOT);
+            name = StringUtils.capitalize(name);
             return name;
         }
 
