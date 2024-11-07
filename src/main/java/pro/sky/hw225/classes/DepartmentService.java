@@ -20,9 +20,7 @@ public class DepartmentService implements DepartmentServiceInterface {
 
     private Collection<Employee> getListByDepartment(int departmentId) {
         return employeeService.getList().stream()
-                .filter(e -> {
-                    return departmentId < 1 || e.getDepartment() == departmentId;
-                })
+                .filter(e -> departmentId < 1 || e.getDepartment() == departmentId)
                 .toList();
     }
 
