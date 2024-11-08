@@ -18,10 +18,24 @@ public class DepartmentService implements DepartmentServiceInterface {
         this.employeeService = employeeService;
     }
 
+    /**
+     * @param departmentId {0|N}
+     * @return List of employees:
+     * <p>  if departmentId == 0  - List of ALL employees
+     * <p>  else - List of employees by departmentId (maybe empty)
+     */
     private Collection<Employee> getListByDepartment(int departmentId) {
-        return employeeService.getList().stream()
-                .filter(e -> departmentId < 1 || e.getDepartment() == departmentId)
-                .toList();
+        if (departmentId == 0) {
+            return getListAll();
+        } else {
+            return employeeService.getList().stream()
+                    .filter(e.getDepartment() == departmentId)
+                    .toList();
+        }
+    }
+
+    private Collection<Employee> getListAll() {
+        return employeeService.getList().stream().toList();
     }
 
     @Override
