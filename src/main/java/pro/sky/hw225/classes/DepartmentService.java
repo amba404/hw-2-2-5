@@ -29,7 +29,7 @@ public class DepartmentService implements DepartmentServiceInterface {
             return getListAll();
         } else {
             return employeeService.getList().stream()
-                    .filter(e.getDepartment() == departmentId)
+                    .filter(e -> e.getDepartment() == departmentId)
                     .toList();
         }
     }
