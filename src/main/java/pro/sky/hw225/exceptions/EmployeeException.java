@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 Если обрабатываются в контроллере, приходится явно указывать статускод в методе обработчика.
 И зачем ResponseStatus тогда тут нужен? Нипанятнаа
 */
-public class EmployeeException extends RuntimeException{
+public class EmployeeException extends RuntimeException {
     public EmployeeException(String message) {
         super(message);
     }

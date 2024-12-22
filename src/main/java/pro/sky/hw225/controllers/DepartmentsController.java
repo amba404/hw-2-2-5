@@ -5,37 +5,44 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.hw225.classes.Employee;
 import pro.sky.hw225.exceptions.EmployeeException;
-import pro.sky.hw225.interfaces.DepartmentServiceInterface;
+import pro.sky.hw225.interfaces.DepartmentService;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/department")
 public class DepartmentsController {
-    final private DepartmentServiceInterface departmentService;
+    final private DepartmentService departmentService;
 
-    public DepartmentsController(DepartmentServiceInterface departmentService) {
+    public DepartmentsController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("/create-test")
-    public Collection<Employee> getCreateTest() {
-        return departmentService.getCreateTest();
+    @GetMapping("/{id}/salary/sum")
+    public Double departmentSalarySum(@PathVariable(name = "id") int departmentId) {
+        return departmentService.getEmployeeSalarySum(departmentId);
     }
 
-    @GetMapping("/max-salary")
-    public Employee departmentMaxSalary(@RequestParam(defaultValue = "0") int departmentId) {
-        return departmentService.getEmployeeMaxSalary(departmentId);
+    @GetMapping("/{id}/salary/max")
+    public Double departmentSalaryMax(@PathVariable(name = "id") int departmentId) {
+        return departmentService.getEmployeeSalaryMax(departmentId);
     }
 
-    @GetMapping("/min-salary")
-    public Employee departmentMinSalary(@RequestParam(defaultValue = "0") int departmentId) {
-        return departmentService.getEmployeeMinSalary(departmentId);
+    @GetMapping("/{id}/salary/min")
+    public Double departmentSalaryMin(@PathVariable(name = "id") int departmentId) {
+        return departmentService.getEmployeeSalaryMin(departmentId);
     }
 
-    @RequestMapping(value = {"/all"}, method = RequestMethod.GET)
-    public Collection<Employee> getAll(@RequestParam(defaultValue = "0") int departmentId) {
+    @RequestMapping(value = {"/{id}/employees"}, method = RequestMethod.GET)
+    public Collection<Employee> getEmployeesByDepartmentId(@PathVariable(name = "id") int departmentId) {
         return departmentService.getList(departmentId);
+    }
+
+    @RequestMapping(value = {"/employees"}, method = RequestMethod.GET)
+    public Map<Integer, List<Employee>> getAll() {
+        return departmentService.getAll();
     }
 
     @ExceptionHandler(EmployeeException.class)

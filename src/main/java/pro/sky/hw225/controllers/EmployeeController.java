@@ -5,16 +5,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pro.sky.hw225.classes.Employee;
 import pro.sky.hw225.exceptions.EmployeeException;
-import pro.sky.hw225.interfaces.EmployeeServiceInterface;
+import pro.sky.hw225.interfaces.EmployeeService;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    final private EmployeeServiceInterface employeeService;
+    final private EmployeeService employeeService;
 
-    public EmployeeController(EmployeeServiceInterface employeeService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
 

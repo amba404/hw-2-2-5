@@ -4,7 +4,7 @@ import pro.sky.hw225.classes.Employee;
 
 import java.util.Collection;
 
-public interface EmployeeServiceInterface {
+public interface EmployeeService {
     Employee add(String firstName, String lastName);
 
     Employee remove(String firstName, String lastName);

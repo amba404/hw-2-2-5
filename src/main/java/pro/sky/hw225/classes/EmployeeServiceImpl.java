@@ -7,12 +7,12 @@ import pro.sky.hw225.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.hw225.exceptions.EmployeeIllegalArgumentsException;
 import pro.sky.hw225.exceptions.EmployeeNotFoundException;
 import pro.sky.hw225.exceptions.EmployeeStorageIsFullException;
-import pro.sky.hw225.interfaces.EmployeeServiceInterface;
+import pro.sky.hw225.interfaces.EmployeeService;
 
 import java.util.*;
 
 @Service
-public class EmployeeService implements EmployeeServiceInterface {
+public class EmployeeServiceImpl implements EmployeeService {
     final private int maxEmployeeCount = 10;
     private final Map<String, Employee> employees = new HashMap<>();
 
