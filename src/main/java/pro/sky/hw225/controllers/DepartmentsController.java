@@ -35,12 +35,12 @@ public class DepartmentsController {
         return departmentService.getEmployeeSalaryMin(departmentId);
     }
 
-    @RequestMapping(value = {"/{id}/employees"}, method = RequestMethod.GET)
+    @GetMapping("/{id}/employees")
     public Collection<Employee> getEmployeesByDepartmentId(@PathVariable(name = "id") int departmentId) {
         return departmentService.getList(departmentId);
     }
 
-    @RequestMapping(value = {"/employees"}, method = RequestMethod.GET)
+    @GetMapping("/employees")
     public Map<Integer, List<Employee>> getAll() {
         return departmentService.getAll();
     }
