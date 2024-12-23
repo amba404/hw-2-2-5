@@ -42,12 +42,14 @@ class DepartmentServiceImplTest {
     @BeforeEach
     void setUp() {
         departmentService = new DepartmentServiceImpl(employeeService);
+
         Mockito.when(employeeService.getList()).thenReturn(employees);
     }
 
     @Test
     void testGetListDept1() {
         Collection<Employee> list = departmentService.getList(1);
+
         Assertions.assertNotNull(list);
         Assertions.assertEquals(2, list.size());
     }
@@ -55,6 +57,7 @@ class DepartmentServiceImplTest {
     @Test
     void testGetListDept11() {
         Collection<Employee> list = departmentService.getList(11);
+
         Assertions.assertNotNull(list);
         Assertions.assertEquals(0, list.size());
     }
@@ -92,9 +95,12 @@ class DepartmentServiceImplTest {
     @Test
     void getAll() {
         Map<Integer, List<Employee>> all = departmentService.getAll();
+
         Assertions.assertNotNull(all);
         Assertions.assertEquals(2, all.size());
+
         List<Employee> dept1 = all.get(1);
+
         Assertions.assertNotNull(dept1);
         Assertions.assertEquals(2, dept1.size());
     }

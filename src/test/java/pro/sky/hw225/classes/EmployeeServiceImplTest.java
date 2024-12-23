@@ -25,6 +25,7 @@ class EmployeeServiceImplTest {
     @Test
     void testAddEmployeeCorrectNames() {
         Employee employee = employeeService.add(" firstname", " lastNAME ");
+
         assertEquals("Firstname", employee.getFirstName());
         assertEquals("Lastname", employee.getLastName());
     }
@@ -63,12 +64,14 @@ class EmployeeServiceImplTest {
     @Test
     void testAddEmployeeAlreadyExist() {
         employeeService.add("firstname", "lastname");
+
         assertThrows(EmployeeAlreadyAddedException.class, () -> employeeService.add("firstname", "lastname"));
     }
 
     @Test
     void testRemoveEmployeeCorrect() {
         Employee employee = employeeService.add("firstname", "lastname");
+
         assertEquals(employee, employeeService.remove("firstname", "lastname"));
     }
 
@@ -80,6 +83,7 @@ class EmployeeServiceImplTest {
     @Test
     void testFindEmployeeCorrect() {
         Employee employee = employeeService.add("firstname", "lastname");
+
         assertEquals(employee, employeeService.find("firstname", "lastname"));
     }
 
@@ -93,7 +97,9 @@ class EmployeeServiceImplTest {
         for (int i = 1; i < 4; i++){
             employeeService.add(getRandomString(i), getRandomString(i));
         }
+
         Collection<Employee> list = employeeService.getList();
+
         assertEquals(3, list.size());
     }
 }
